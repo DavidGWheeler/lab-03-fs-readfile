@@ -2,20 +2,25 @@
 
 const fs = require('fs');
 
-let hexArray = [];
-
-module.exports = function(callback) {
-  fs.readFile(`${__dirname}../data/one.txt`, function(err, data) {
-    if(err) throw err;
+module.exports = function(files, callback) {
+  let hexArray = [];
+  // console.log(files[0]);
+  fs.readFile(files[0], function(err, data) {
+    if(err) callback(err);
     hexArray.push(data.toString('hex', 0, 8));
-    fs.readFile(`${__dirname}/../data/two.txt`, function(err, data) {
-      if(err) throw err;
+
+    fs.readFile(files[1], function(err, data) {
+      if(err) callback(err);
       hexArray.push(data.toString('hex', 0, 8));
-      fs.readFile(`${__dirname}../data/three.txt`, function(err, data) {
-        if(err) throw err;
+
+      fs.readFile(files[2], function(err, data) {
+        if(err) callback(err);
         hexArray.push(data.toString('hex', 0, 8));
-        callback(hexArray);
+        console.log('hexArray', hexArray);
+
+        callback(null, hexArray);
       });
     });
   });
+  // console.log(hexArray);
 };
