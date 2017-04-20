@@ -4,7 +4,6 @@ const fs = require('fs');
 
 module.exports = function(files, callback) {
   let hexArray = [];
-  // console.log(files[0]);
   fs.readFile(files[0], function(err, data) {
     if(err) callback(err);
     hexArray.push(data.toString('hex', 0, 8));
@@ -22,5 +21,4 @@ module.exports = function(files, callback) {
       });
     });
   });
-  // console.log(hexArray);
 };
